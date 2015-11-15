@@ -154,7 +154,11 @@ Dropify.prototype.setPreview = function(src)
     var render = this.preview.children('.dropify-render');
 
     if (this.isImage() === true) {
-        $('<img />').attr('src', src).appendTo(render);
+		var imgTag = $('<img />').attr('src', src);
+		if(this.settings.height) {
+			imgTag.css("max-height", this.settings.height);
+		}
+		imgTag.appendTo(render);
     } else {
         $('<i />').attr('class', 'dropify-font-file').appendTo(render);
         $('<span class="dropify-extension" />').html(this.getFileType()).appendTo(render);
